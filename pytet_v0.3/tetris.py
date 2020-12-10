@@ -140,25 +140,25 @@ class Tetris():
                 self.top -= 1
                 self.state = TetrisState.NewBlock
 
-            self.currBlk = Matrix(Tetris.setOfBlockObjects[self.idxBlockType][self.idxBlockDegree])
-            self.tempBlk = self.iScreen.clip(self.top, self.left, self.top + self.currBlk.get_dy(), self.left + self.currBlk.get_dx())
-            self.tempBlk = self.tempBlk + self.currBlk
+        self.currBlk = Matrix(Tetris.setOfBlockObjects[self.idxBlockType][self.idxBlockDegree])
+        self.tempBlk = self.iScreen.clip(self.top, self.left, self.top + self.currBlk.get_dy(), self.left + self.currBlk.get_dx())
+        self.tempBlk = self.tempBlk + self.currBlk
 
+        self.oScreen = Matrix(self.iScreen)
+        self.oScreen.paste(self.tempBlk, self.top, self.left)
+
+        if self.state == TetrisState.NewBlock:
+            self.oScreen = self.deleteFullLines()
+            self.iScreen = Matrix(self.oScreen)
+            self.top = 0
+            self.left = Tetris.iScreenDw + self.iScreenDx//2 - 2
+            self.idxBlockDegree = 0
+
+        if self.tempBlk.anyGreaterThan(1):
+            self.state = TetrisState.Finished
             self.oScreen = Matrix(self.iScreen)
-            self.oScreen.paste(self.tempBlk, self.top, self.left)
 
-            if self.state == TetrisState.NewBlock:
-                self.oScreen = self.deleteFullLines()
-                self.iScreen = Matrix(self.oScreen)
-                self.top = 0
-                self.left = Tetris.iScreenDw + self.iScreenDx//2 - 2
-                self.idxBlockDegree = 0
-
-            if self.tempBlk.anyGreaterThan(1):
-                self.state = TetrisState.Finished
-                self.oScreen = Matrix(self.iScreen)
-
-            return self.state
+        return self.state
 
 ### end of class Tetris():
     
