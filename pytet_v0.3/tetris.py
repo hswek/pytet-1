@@ -57,6 +57,9 @@ class Tetris():
         self.iScreen = Matrix(arrayScreen)
         self.oScreen = Matrix(self.iScreen)
         self.justStarted = True
+	self.state = TetrisState.NewBlock
+	self.left = Tetris.iScreenDw + self.iScreenDx//2 - 2
+	self.top = 0
         return
 
     def printScreen(self):
