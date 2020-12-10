@@ -120,7 +120,7 @@ class Tetris():
                 self.tempBlk = self.iScreen.clip(self.top, self.left, self.top + self.currBlk.get_dy(), self.left + self.currBlk.get_dx())
                 self.tempBlk = self.tempBlk + self.currBlk
         else:
-            printf("Wrong key!!!")
+            print("Wrong key!!!")
 
         self.currBlk = Matrix(Tetris.setOfBlockObjects[self.idxBlockType][self.idxBlockDegree])
         self.tempBlk = self.iScreen.clip(self.top, self.left, self.top + self.currBlk.get_dy(), self.left + self.currBlk.get_dx())
